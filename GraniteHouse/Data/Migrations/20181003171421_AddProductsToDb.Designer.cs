@@ -4,14 +4,16 @@ using GraniteHouse.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraniteHouse.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181003171421_AddProductsToDb")]
+    partial class AddProductsToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +44,6 @@ namespace GraniteHouse.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductTypeId");
-
-                    b.HasIndex("SpecialTagsId");
 
                     b.ToTable("Products");
                 });
@@ -250,7 +250,7 @@ namespace GraniteHouse.Data.Migrations
 
                     b.HasOne("GraniteHouse.Models.SpecialTags", "SpecialTags")
                         .WithMany()
-                        .HasForeignKey("SpecialTagsId")
+                        .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
